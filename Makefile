@@ -1,5 +1,9 @@
 SVN = http://cellprofiler.org/svnmirror/ExampleImages/ExampleHumanImages
 
+.DEFAULT_GOAL: build
+build:
+		docker build -t cellprofiler .
+
 .PHONY: input
 input:
 		mkdir -p $@
