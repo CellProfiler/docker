@@ -74,13 +74,7 @@ WORKDIR /usr/local/src
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
 RUN pip install                                                     \
-  --requirement                                                     \
-    requirements.txt
-RUN pip install                                                     \
   --editable                                                        \
-    git+https://github.com/CellH5/cellh5.git#egg=cellh5             \
-  --upgrade
-RUN python external_dependencies.py
-RUN python CellProfiler.py --build-and-exit
-ENTRYPOINT ["python", "CellProfiler.py", "--run", "--run-headless"]
+    .
+ENTRYPOINT ["cellprofiler", "--run", "--run-headless"]
 CMD ["--help"]
