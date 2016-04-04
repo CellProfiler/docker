@@ -47,7 +47,7 @@
 #
 #                                 - [ BROAD‘15 ] -
 #                                                          -0x00B1 [05/06/84]
-FROM phusion/baseimage
+FROM 706558928550.dkr.ecr.us-east-1.amazonaws.com/baseimage:latest
 RUN apt-get -y update                                            && \
     apt-get -y upgrade                                           && \
     apt-get -y install                                              \
