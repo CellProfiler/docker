@@ -1,8 +1,9 @@
+VERSION = v2.2.0-1
 SVN = http://cellprofiler.org/svnmirror/ExampleImages/ExampleHumanImages
 
 .DEFAULT_GOAL: build
 build:
-		docker build -t cellprofiler .
+	docker build -t cellprofiler:$(VERSION) .
 
 .PHONY: input
 input:
