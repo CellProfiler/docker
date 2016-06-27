@@ -43,7 +43,7 @@ input/filelist.txt: input/AS_09125_050116030001_D03f00d0.tif input/AS_09125_0501
 .PHONY: test
 test: input output input/filelist.txt input/ExampleHuman.cppipe
 		docker run --volume=`pwd`/input:/input --volume=`pwd`/output:/output cellprofiler -r -c \
-		--pipeline=/input/ExampleHuman.cppipe \
+		--p /input/ExampleHuman.cppipe \
 		--image-directory=/input \
 		--output-directory=/output \
 		--file-list=/input/filelist.txt
