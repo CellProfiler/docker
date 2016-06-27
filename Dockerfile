@@ -48,30 +48,33 @@
 #                                 - [ BROAD‘15 ] -
 #                                                          -0x00B1 [05/06/84]
 FROM ubuntu:14.04
-RUN apt-get -y update                                            && \
-    apt-get -y upgrade                                           && \
-    apt-get -y install                                              \
-      cython                                                        \
-      git                                                           \
-      openjdk-7-jdk                                                 \
-      python-h5py                                                   \
-      python-imaging                                                \
-      python-libtiff                                                \
-      python-lxml                                                   \
-      python-matplotlib                                             \
-      python-mysqldb                                                \
-      python-numpy                                                  \
-      python-pandas                                                 \
-      python-pip                                                    \
-      python-scipy                                                  \
-      python-skimage                                                \
-      python-sklearn                                                \
-      python-vigra                                                  \
-      python-wxgtk2.8                                               \
-      python-zmq                                                    \
-      xvfb
+RUN apt-get -y update           && \
+    apt-get -y upgrade          && \
+    apt-get -y install             \
+      cython                       \
+      default-jdk                  \
+      git                          \
+      libmysqlclient-dev           \
+      libhdf5-dev                  \
+      python-pip                   \
+      python-h5py                  \
+      python-matplotlib            \
+      python-mysqldb               \
+      python-scipy                 \
+      python-vigra                 \
+      python-lxml                  \
+      python-pandas                \
+      python-scipy                 \
+      python-sklearn               \
+      python-wxgtk2.8              \
+      python-zmq                   \
+      unzip
+RUN pip install --upgrade cython
+RUN pip install --upgrade scikit-image
+
 WORKDIR /usr/local/src
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
+RUN git checkout stable
 WORKDIR /usr/local/src/CellProfiler
 RUN pip install                                                     \
   --editable                                                        \
