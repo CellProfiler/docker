@@ -47,7 +47,7 @@
 #
 #                                 - [ BROAD‘15 ] -
 #                                                          -0x00B1 [05/06/84]
-FROM 706558928550.dkr.ecr.us-east-1.amazonaws.com/baseimage:v0.9.18-1
+FROM ubuntu:14.04
 RUN apt-get -y update           && \
     apt-get -y upgrade          && \
     apt-get -y install             \
