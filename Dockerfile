@@ -74,8 +74,8 @@ RUN pip install --upgrade scikit-image
 
 WORKDIR /usr/local/src
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
-RUN git checkout stable
 WORKDIR /usr/local/src/CellProfiler
+RUN git checkout stable
 RUN pip install                                                     \
   --editable                                                        \
     .
