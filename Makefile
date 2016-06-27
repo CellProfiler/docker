@@ -12,10 +12,9 @@ output:
 		mkdir -m 777 -p $@
 
 input/ExampleHuman.cppipe input/AS_09125_050116030001_D03f00d0.tif input/AS_09125_050116030001_D03f00d1.tif input/AS_09125_050116030001_D03f00d2.tif:
-		cd input
 		wget http://d1zymp9ayga15t.cloudfront.net/content/Examplezips/ExampleHumanImages.zip
 		unzip ExampleHumanImages.zip
-		mv ExampleHumanImages/* .
+		mv ExampleHumanImages/* input/
 		rmdir ExampleHumanImages
 
 input/filelist.txt: input/AS_09125_050116030001_D03f00d0.tif input/AS_09125_050116030001_D03f00d1.tif input/AS_09125_050116030001_D03f00d2.tif
