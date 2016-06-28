@@ -5,8 +5,7 @@
 
 # Building on AWS
 
-Launch an instance with the Amazon Linux AMI and   
-[set up docker](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html):
+Launch an instance with the Amazon Linux AMI and [set up docker](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html):
  
     $ sudo yum update -y
     $ sudo yum install -y docker
