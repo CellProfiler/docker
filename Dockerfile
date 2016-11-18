@@ -73,8 +73,6 @@ RUN apt-get -y update                                            && \
 WORKDIR /usr/local/src
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
-RUN pip install                                                     \
-  --editable                                                        \
-    .
+RUN pip install --editable .
 ENTRYPOINT ["cellprofiler", "--run", "--run-headless"]
 CMD ["--help"]
