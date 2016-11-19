@@ -70,6 +70,7 @@ RUN apt-get -y update                                            && \
       python-wxgtk2.8                                               \
       python-zmq                                                    \
       xvfb
+RUN pip install cython --upgrade
 WORKDIR /usr/local/src
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
