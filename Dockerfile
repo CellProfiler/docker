@@ -71,7 +71,7 @@ RUN apt-get -y update                                            && \
       python-zmq                                                    \
       xvfb
 WORKDIR /usr/local/src
-ARG VERSION=master
+ARG VERSION=stable
 RUN git clone -b $VERSION https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
 RUN pip install                                                     \
