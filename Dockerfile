@@ -1,6 +1,8 @@
 FROM ubuntu:14.04
 # Install CellProfiler
-RUN   apt-get -y install                                              \
+RUN   apt-get -y update &&
+    # apt-get -y upgrade &&
+      apt-get -y install                                              \
       cython                                                        \
       git                                                           \
       openjdk-7-jdk                                                 \
