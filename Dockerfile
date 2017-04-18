@@ -9,7 +9,7 @@ RUN apt-get -y update                                            && \
     apt-get -y install                                              \
       cython                                                        \
       git                                                           \
-      openjdk-7-jdk                                                 \
+      openjdk-8-jdk                                                 \
       python-h5py                                                   \
       python-imaging                                                \
       python-libtiff                                                \
@@ -23,7 +23,7 @@ RUN apt-get -y update                                            && \
       python-skimage                                                \
       python-sklearn                                                \
       python-vigra                                                  \
-      python-wxgtk2.8                                               \
+      python-wxgtk3.0                                               \
       python-zmq                                                    \
       xvfb
 # Clean up APT when done.
