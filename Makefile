@@ -1,4 +1,5 @@
 VERSION = v2.2.0
+# From http://cellprofiler.org/examples/#HumanCells
 CDN = http://d1zymp9ayga15t.cloudfront.net/content/Examplezips
 
 .DEFAULT_GOAL: build
