@@ -1,5 +1,5 @@
 VERSION = v2.2.0
-SVN = http://cellprofiler.org/svnmirror/ExampleImages/ExampleHumanImages
+CDN = http://d1zymp9ayga15t.cloudfront.net/content/Examplezips
 
 .DEFAULT_GOAL: build
 build:
@@ -12,35 +12,25 @@ input:
 output:
 		mkdir -m 777 -p $@
 
-ExampleHuman.cppipe:
-		curl -O ${SVN}/ExampleHuman.cppipe
+ExampleHumanImages.zip:
+		curl -O ${CDN}/$@
 
-input/ExampleHuman.cppipe: ExampleHuman.cppipe
-		mv $< $@
+data: ExampleHumanImages.zip
+		unzip $< -d input
+		mv input/ExampleHumanImages/* input/
+		rmdir input/ExampleHumanImages
 
-AS_09125_050116030001_D03f00d0.tif:
-		curl -O ${SVN}/$@
-
-input/AS_09125_050116030001_D03f00d0.tif: AS_09125_050116030001_D03f00d0.tif
-		mv $< $@
-
-AS_09125_050116030001_D03f00d1.tif: AS_09125_050116030001_D03f00d1.tif
-		curl -O ${SVN}/$@
-
-input/AS_09125_050116030001_D03f00d1.tif: AS_09125_050116030001_D03f00d1.tif
-		mv $< $@
-
-AS_09125_050116030001_D03f00d2.tif:
-		curl -O ${SVN}/$@
-
-input/AS_09125_050116030001_D03f00d2.tif: AS_09125_050116030001_D03f00d2.tif
-		mv $< $@
-
-input/filelist.txt: input/AS_09125_050116030001_D03f00d0.tif input/AS_09125_050116030001_D03f00d1.tif input/AS_09125_050116030001_D03f00d2.tif
+input/filelist.txt: data
 		echo 'file:///input/AS_09125_050116030001_D03f00d0.tif' >> $@
 		echo 'file:///input/AS_09125_050116030001_D03f00d1.tif' >> $@
 		echo 'file:///input/AS_09125_050116030001_D03f00d2.tif' >> $@
 
+.PHONY: clean
+clean:
+	rm -r input
+	rm -r output
+	rm ExampleHumanImages.zip
+
 .PHONY: test
-test: input output input/filelist.txt input/ExampleHuman.cppipe
+test: input output data input/filelist.txt
 	docker run --volume=`pwd`/input:/input --volume=`pwd`/output:/output cellprofiler:$(VERSION) --image-directory=/input --output-directory=/output --pipeline=/input/ExampleHuman.cppipe --file-list=/input/filelist.txt
