@@ -1,4 +1,4 @@
-VERSION = v2.2.0-1
+VERSION = v2.2.0
 SVN = http://cellprofiler.org/svnmirror/ExampleImages/ExampleHumanImages
 
 .DEFAULT_GOAL: build

@@ -1,26 +1,25 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 # Install CellProfiler
 RUN   apt-get -y update &&                                          \
       apt-get -y install                                            \
-      cython                                                        \
-      git                                                           \
-      openjdk-7-jdk                                                 \
-      python-h5py                                                   \
-      python-imaging                                                \
-      python-libtiff                                                \
-      python-lxml                                                   \
-      python-matplotlib                                             \
-      python-mysqldb                                                \
-      python-numpy                                                  \
-      python-pandas                                                 \
-      python-pip                                                    \
-      python-scipy                                                  \
-      python-skimage                                                \
-      python-sklearn                                                \
-      python-vigra                                                  \
-      python-wxgtk2.8                                               \
-      python-zmq                                                    \
-      xvfb
+        build-essential    \
+        cython             \
+        git                \
+        libmysqlclient-dev \
+        libhdf5-dev        \
+        libxml2-dev        \
+        libxslt1-dev       \
+        openjdk-8-jdk      \
+        python-dev         \
+        python-pip         \
+        python-h5py        \
+        python-matplotlib  \
+        python-mysqldb     \
+        python-scipy       \
+        python-numpy       \
+        python-vigra       \
+        python-wxgtk3.0    \
+        python-zmq
 WORKDIR /usr/local/src
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
@@ -32,5 +31,5 @@ RUN pip install                                                     \
 # Fix init problems using s6 overlay
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.11.0.1/s6-overlay-amd64.tar.gz /tmp/
 RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /
-ENTRYPOINT ["/init"]
-CMD ["cellprofiler", "--run", "--run-headless", "--help"]
+ENTRYPOINT ["/init", "cellprofiler"]
+CMD ["--run", "--run-headless", "--help"]
