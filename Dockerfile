@@ -47,7 +47,7 @@
 #
 #                                 - [ BROAD‘15 ] -
 #                                                          -0x00B1 [05/06/84]
-FROM ubuntu:14.04
+FROM phusion/baseimage
 RUN apt-get -y update                                            && \
     apt-get -y upgrade                                           && \
     apt-get -y install                                              \
@@ -77,5 +77,5 @@ WORKDIR /usr/local/src/CellProfiler
 RUN pip install                                                     \
   --editable                                                        \
     .
-ENTRYPOINT ["cellprofiler", "--run", "--run-headless"]
+ENTRYPOINT ["/sbin/my_init", "--", "cellprofiler", "--run", "--run-headless"]
 CMD ["--help"]
