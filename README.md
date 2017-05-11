@@ -1,5 +1,4 @@
-[![Build
-Status](https://travis-ci.com/recursionpharma/cellprofiler-docker.svg?token=GrWRwBK4pgTygz4Nzroz&branch=master)](https://travis-ci.com/recursionpharma/cellprofiler-docker)
+[![Build Status](https://travis-ci.org/CellProfiler/docker.svg?branch=master)](https://travis-ci.org/CellProfiler/docker)
 
 Testing docker locally:
 
