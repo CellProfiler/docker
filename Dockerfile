@@ -70,12 +70,11 @@ RUN apt-get -y update                                            && \
       python-wxgtk2.8                                               \
       python-zmq                                                    \
       xvfb
+RUN pip install cython --upgrade
 WORKDIR /usr/local/src
 ARG VERSION=stable
 RUN git clone -b $VERSION https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
-RUN pip install                                                     \
-  --editable                                                        \
-    .
+RUN pip install --editable .
 ENTRYPOINT ["cellprofiler", "--run", "--run-headless"]
 CMD ["--help"]
