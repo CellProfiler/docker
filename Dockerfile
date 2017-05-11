@@ -22,10 +22,10 @@ RUN   apt-get -y update &&                                          \
         python-zmq
 WORKDIR /usr/local/src
 # Install CellProfiler
-ARG VERSION=stable
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
 WORKDIR /usr/local/src/CellProfiler
-RUN git checkout -b $VERSION
+ARG VERSION=tags/2.2.0
+RUN git checkout $VERSION
 RUN pip install --editable .
 # Fix init and zombie process reaping problems using s6 overlay
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.11.0.1/s6-overlay-amd64.tar.gz /tmp/

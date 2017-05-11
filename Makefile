@@ -1,4 +1,4 @@
-VERSION = v2.2.0
+VERSION = latest
 # Inputs from http://cellprofiler.org/examples/#HumanCells
 EXAMPLE_CDN = http://d1zymp9ayga15t.cloudfront.net/content/Examplezips
 # Public gold output files
@@ -50,7 +50,14 @@ clean:
 
 .PHONY: test
 test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03f00d0_Outline.png Cells.csv Nuclei.csv Cytoplasm.csv
-	docker run --volume=`pwd`/input:/input --volume=`pwd`/output:/output cellprofiler:$(VERSION) --image-directory=/input --output-directory=/output --pipeline=/input/ExampleHuman.cppipe --file-list=/input/filelist.txt
+	docker run \
+		--volume=`pwd`/input:/input \
+		--volume=`pwd`/output:/output \
+		cellprofiler:$(VERSION) \
+		--image-directory=/input \
+		--output-directory=/output \
+		--pipeline=/input/ExampleHuman.cppipe \
+		--file-list=/input/filelist.txt
 	# Compare gold files against output that was run.
 	diff -b output/AS_09125_050116030001_D03f00d0_Outline.png output/gold/AS_09125_050116030001_D03f00d0_Outline.png
 	diff -b output/Nuclei.csv output/gold/Nuclei.csv
