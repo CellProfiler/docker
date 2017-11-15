@@ -34,8 +34,8 @@ master.zip:
 
 data: master.zip
 	unzip $< -d input
-	mv input/ExampleHuman/images/* input/
-	mv input/ExampleHuman/ExampleHuman.cppipe input/
+	mv input/examples-master/ExampleHuman/images/* input/
+	mv input/examples-master/ExampleHuman/ExampleHuman.cppipe input/
 
 input/filelist.txt: data
 	echo 'file:///input/AS_09125_050116030001_D03f00d0.tif' >> $@
