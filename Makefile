@@ -1,6 +1,6 @@
 VERSION = latest
 # Inputs from https://github.com/CellProfiler/examples/tree/master/ExampleHuman
-EXAMPLE_CDN = https://github.com/CellProfiler/examples.git
+EXAMPLE_CDN = https://github.com/karhohs/docker-cellprofiler/archive/master.zip
 # Public gold output files
 S3_GOLD = https://s3-us-west-2.amazonaws.com/recursion-test-files/travis-cellprofiler-docker
 
