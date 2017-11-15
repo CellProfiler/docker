@@ -1,8 +1,8 @@
 VERSION = latest
-# Inputs from http://cellprofiler.org/examples/#HumanCells
-EXAMPLE_CDN = http://d1zymp9ayga15t.cloudfront.net/content/Examplezips
+# Inputs from https://github.com/CellProfiler/examples/tree/master/ExampleHuman
+EXAMPLE_CDN = https://github.com/CellProfiler/examples/archive/master.zip
 # Public gold output files
-S3_GOLD = https://s3-us-west-2.amazonaws.com/recursion-test-files/travis-cellprofiler-docker
+S3_GOLD = https://s3.amazonaws.com/cellprofiler-examples/example-human-gold-standard
 
 .DEFAULT_GOAL: build
 build:
@@ -20,22 +20,16 @@ output:
 # because it contains hashes that change per-run.
 output/gold:	output
 	mkdir $@
-AS_09125_050116030001_D03f00d0_Outline.png:	output/gold
-	curl -o $</$@ ${S3_GOLD}/$@
-Cells.csv:	output/gold
-	curl -o $</$@ ${S3_GOLD}/$@
-Nuclei.csv:	output/gold
-	curl -o $</$@ ${S3_GOLD}/$@
-Cytoplasm.csv: output/gold
+AS_09125_050116030001_D03f00d0_Overlay.png:	output/gold
 	curl -o $</$@ ${S3_GOLD}/$@
 
-ExampleHumanImages.zip:
-	curl -O ${EXAMPLE_CDN}/$@
+master.zip:
+	curl -LOk ${EXAMPLE_CDN}
 
-data: ExampleHumanImages.zip
+data: master.zip
 	unzip $< -d input
-	mv input/ExampleHumanImages/* input/
-	rmdir input/ExampleHumanImages
+	mv input/examples-master/ExampleHuman/images/* input/
+	mv input/examples-master/ExampleHuman/ExampleHuman.cppipe input/
 
 input/filelist.txt: data
 	echo 'file:///input/AS_09125_050116030001_D03f00d0.tif' >> $@
@@ -46,10 +40,10 @@ input/filelist.txt: data
 clean:
 	rm -r input
 	rm -r output
-	rm ExampleHumanImages.zip
+	rm master.zip
 
 .PHONY: test
-test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03f00d0_Outline.png Cells.csv Nuclei.csv Cytoplasm.csv
+test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03f00d0_Overlay.png
 	docker run \
 		--volume=`pwd`/input:/input \
 		--volume=`pwd`/output:/output \
@@ -59,7 +53,4 @@ test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03
 		--pipeline=/input/ExampleHuman.cppipe \
 		--file-list=/input/filelist.txt
 	# Compare gold files against output that was run.
-	diff -b output/AS_09125_050116030001_D03f00d0_Outline.png output/gold/AS_09125_050116030001_D03f00d0_Outline.png
-	diff -b output/Nuclei.csv output/gold/Nuclei.csv
-	diff -b output/Cells.csv output/gold/Cells.csv
-	diff -b output/Cytoplasm.csv output/gold/Cytoplasm.csv
+	diff -b output/AS_09125_050116030001_D03f00d0_Overlay.png output/gold/AS_09125_050116030001_D03f00d0_Overlay.png
