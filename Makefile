@@ -30,7 +30,7 @@ Cytoplasm.csv: output/gold
 	curl -o $</$@ ${S3_GOLD}/$@
 
 master.zip:
-	curl -LOk ${EXAMPLE_CDN}/$@
+	curl -LOk ${EXAMPLE_CDN}
 
 data: master.zip
 	unzip $< -d input
