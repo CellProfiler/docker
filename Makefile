@@ -29,10 +29,10 @@ Nuclei.csv:	output/gold
 Cytoplasm.csv: output/gold
 	curl -o $</$@ ${S3_GOLD}/$@
 
-examples-master.zip:
+master.zip:
 	curl -O ${EXAMPLE_CDN}/$@
 
-data: examples-master.zip
+data: master.zip
 	unzip $< -d input
 	mv input/ExampleHuman/images/* input/
 	mv input/ExampleHuman/ExampleHuman.cppipe input/
