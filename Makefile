@@ -29,7 +29,7 @@ Nuclei.csv:	output/gold
 Cytoplasm.csv: output/gold
 	curl -o $</$@ ${S3_GOLD}/$@
 
-ExampleHumanImages.zip:
+examples-master.zip:
 	curl -O ${EXAMPLE_CDN}/$@
 
 data: examples-master.zip
