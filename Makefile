@@ -1,6 +1,6 @@
 VERSION = latest
-# Inputs from http://cellprofiler.org/examples/#HumanCells
-EXAMPLE_CDN = http://d1zymp9ayga15t.cloudfront.net/content/Examplezips
+# Inputs from https://github.com/CellProfiler/examples/tree/master/ExampleHuman
+EXAMPLE_CDN = https://github.com/CellProfiler/examples.git
 # Public gold output files
 S3_GOLD = https://s3-us-west-2.amazonaws.com/recursion-test-files/travis-cellprofiler-docker
 
@@ -32,10 +32,11 @@ Cytoplasm.csv: output/gold
 ExampleHumanImages.zip:
 	curl -O ${EXAMPLE_CDN}/$@
 
-data: ExampleHumanImages.zip
-	unzip $< -d input
-	mv input/ExampleHumanImages/* input/
-	rmdir input/ExampleHumanImages
+data: examples-master.zip
+	unzip $< -d examples
+	mv examples/ExampleHuman/images/* input/
+	mv examples/ExampleHuman/ExampleHuman.cppipe input/
+	rmdir examples
 
 input/filelist.txt: data
 	echo 'file:///input/AS_09125_050116030001_D03f00d0.tif' >> $@
