@@ -22,12 +22,6 @@ output/gold:	output
 	mkdir $@
 AS_09125_050116030001_D03f00d0_Overlay.png:	output/gold
 	curl -o $</$@ ${S3_GOLD}/$@
-Cells.csv:	output/gold
-	curl -o $</$@ ${S3_GOLD}/$@
-Nuclei.csv:	output/gold
-	curl -o $</$@ ${S3_GOLD}/$@
-Cytoplasm.csv: output/gold
-	curl -o $</$@ ${S3_GOLD}/$@
 
 master.zip:
 	curl -LOk ${EXAMPLE_CDN}
@@ -49,7 +43,7 @@ clean:
 	rm master.zip
 
 .PHONY: test
-test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03f00d0_Overlay.png Cells.csv Nuclei.csv Cytoplasm.csv
+test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03f00d0_Overlay.png
 	docker run \
 		--volume=`pwd`/input:/input \
 		--volume=`pwd`/output:/output \
@@ -60,6 +54,3 @@ test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03
 		--file-list=/input/filelist.txt
 	# Compare gold files against output that was run.
 	diff -b output/AS_09125_050116030001_D03f00d0_Overlay.png output/gold/AS_09125_050116030001_D03f00d0_Overlay.png
-	diff -b output/Nuclei.csv output/gold/Nuclei.csv
-	diff -b output/Cells.csv output/gold/Cells.csv
-	diff -b output/Cytoplasm.csv output/gold/Cytoplasm.csv
