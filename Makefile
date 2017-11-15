@@ -33,10 +33,9 @@ examples-master.zip:
 	curl -O ${EXAMPLE_CDN}/$@
 
 data: examples-master.zip
-	unzip $< -d examples
-	mv examples/ExampleHuman/images/* input/
-	mv examples/ExampleHuman/ExampleHuman.cppipe input/
-	rmdir examples
+	unzip $< -d input
+	mv input/ExampleHuman/images/* input/
+	mv input/ExampleHuman/ExampleHuman.cppipe input/
 
 input/filelist.txt: data
 	echo 'file:///input/AS_09125_050116030001_D03f00d0.tif' >> $@
