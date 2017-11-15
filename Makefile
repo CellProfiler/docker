@@ -46,7 +46,7 @@ input/filelist.txt: data
 clean:
 	rm -r input
 	rm -r output
-	rm ExampleHumanImages.zip
+	rm master.zip
 
 .PHONY: test
 test: input output output/gold data input/filelist.txt AS_09125_050116030001_D03f00d0_Outline.png Cells.csv Nuclei.csv Cytoplasm.csv
