@@ -76,13 +76,18 @@ WORKDIR /usr/local/src
 
 # Install CellProfiler
 RUN git clone https://github.com/CellProfiler/CellProfiler.git
+
 WORKDIR /usr/local/src/CellProfiler
-ARG VERSION=tags/v3.0.0
-RUN git checkout $VERSION
+
+ARG version=3.0.0
+
+RUN git checkout tags/v$version
+
 RUN pip install --editable .
 
 # Fix init and zombie process reaping problems using s6 overlay
 ADD https://github.com/just-containers/s6-overlay/releases/download/v1.11.0.1/s6-overlay-amd64.tar.gz /tmp/
+
 RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /
 
 ENTRYPOINT ["/init", "cellprofiler"]
